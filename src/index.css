@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+:root {
+  --maiColor: #0aad0a;
+  --light-color: #f0f3f2;
+  --shadow: rgba(145, 158, 171, 0.2), 0px 2px 4px -1px, rgba(145, 158, 171, 14),
+    0px 4px 5px 0px, rgba(145, 158, 171, 12), 0px 1px 10px 0px;
+  --font-family: "Assistant", serif;
+  --rating-color: #ffc908;
+}
+
+.active {
+  color: var(--maiColor);
+}
+
+body {
+  font-family: var(--font-family);
+}
