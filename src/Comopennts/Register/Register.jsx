@@ -71,7 +71,7 @@ export default function Regester() {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="w-7/12 mx-auto">
+    <form onSubmit={formik.handleSubmit} className="w-7/12 mt-35 mx-auto">
       <div className="mb-5">
         <label
           htmlFor="Name"

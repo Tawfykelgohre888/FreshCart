@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { authContext } from "../../Context/AuthenticationContext"; // التأكد من استيراد السياق الصحيح
 
-// التحقق من صحة البيانات باستخدام Yup
 const validationSchema = yup.object().shape({
   email: yup
     .string()
@@ -48,7 +47,6 @@ export default function Login() {
     }
   }
 
-  // تكوين فورم فورميك
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -65,7 +63,6 @@ export default function Login() {
     >
       <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
 
-      {/* حقل البريد الإلكتروني */}
       <div className="mb-5">
         <label
           htmlFor="email"
@@ -87,7 +84,6 @@ export default function Login() {
         )}
       </div>
 
-      {/* حقل كلمة المرور */}
       <div className="mb-5">
         <label
           htmlFor="password"
@@ -111,7 +107,6 @@ export default function Login() {
         )}
       </div>
 
-      {/* زر تسجيل الدخول */}
       <button
         type="submit"
         className="w-full text-white bg-green-600 hover:bg-green-700 transition-all duration-300 ease-in-out px-6 py-2 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105"
@@ -120,7 +115,6 @@ export default function Login() {
         {loading ? "Loading..." : "Login"}
       </button>
 
-      {/* عرض رسالة الخطأ أو النجاح */}
       {msg && <div className="mt-4 text-center text-red-600">{msg}</div>}
     </form>
   );

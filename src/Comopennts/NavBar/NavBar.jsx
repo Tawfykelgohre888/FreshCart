@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/freshcart-logo.svg";
 import { authContext } from "../../Context/AuthenticationContext";
+import { cartContext } from "../../Context/CartContext";
 
 export default function NavBar() {
-const { token, setToken } = useContext(authContext);
-  const navigate = useNavigate();  
+  const { token, setToken } = useContext(authContext);
+  const { numOfCartItems } = useContext(cartContext);
+  const navigate = useNavigate();
 
   function logOut() {
     localStorage.removeItem("token");
@@ -15,8 +17,11 @@ const { token, setToken } = useContext(authContext);
 
   return (
     <>
-      <nav className="bg-white  border-gray-200 dark:bg-gray-900 shadow fixed top-0 left-0 w-full mb-8  ">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
+      <nav
+        className="bg-white border-gray-200 dark:bg-gray-900 shadow fixed top-0 left-0 w-full"
+        style={{ zIndex: 10 }}
+      >
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* Logo */}
           <Link
             to="/"
@@ -24,32 +29,6 @@ const { token, setToken } = useContext(authContext);
           >
             <img src={Logo} className="h-8" alt="FreshCart Logo" />
           </Link>
-
-          {/* Toggle Button */}
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
 
           {/* Navbar Items */}
           <div
@@ -70,9 +49,15 @@ const { token, setToken } = useContext(authContext);
                   <li>
                     <NavLink
                       to="/cart"
-                      className="block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                      className="relative flex items-center py-2 px-3 text-gray-900 rounded-md hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
                     >
-                      Cart
+                      Cart:
+                      <i className="fas fa-shopping-cart text-xl"></i>
+                      {numOfCartItems > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                          {numOfCartItems}
+                        </span>
+                      )}
                     </NavLink>
                   </li>
                   <li>
@@ -104,28 +89,6 @@ const { token, setToken } = useContext(authContext);
             </ul>
           </div>
 
-          {/* Social Media Icons */}
-          <div className="hidden md:flex space-x-4">
-            <a href="#" className="text-gray-500 dark:text-white">
-              <i className="fa-brands fa-instagram"></i>
-            </a>
-            <a href="#" className="text-gray-500 dark:text-white">
-              <i className="fa-brands fa-facebook"></i>
-            </a>
-            <a href="#" className="text-gray-500 dark:text-white">
-              <i className="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="#" className="text-gray-500 dark:text-white">
-              <i className="fa-brands fa-twitter"></i>
-            </a>
-            <a href="#" className="text-gray-500 dark:text-white">
-              <i className="fa-brands fa-linkedin"></i>
-            </a>
-            <a href="#" className="text-gray-500 dark:text-white">
-              <i className="fa-brands fa-youtube"></i>
-            </a>
-          </div>
-
           {/* SignOut Button */}
           <div className="ml-4 space-x-3">
             {token ? (
@@ -139,13 +102,13 @@ const { token, setToken } = useContext(authContext);
               <>
                 <Link
                   to="Login"
-                  className="px-4 py-2 text-white  bg-green-500 rounded-md hover:bg-green-600"
+                  className="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
                 >
                   Login
                 </Link>
                 <Link
                   to="Register"
-                  className="px-4 py-2 text-white  bg-green-500 rounded-md hover:bg-green-600"
+                  className="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
                 >
                   Register
                 </Link>
